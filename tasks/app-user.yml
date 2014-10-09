@@ -1,0 +1,9 @@
+---
+# Configure access to psql for app user
+
+- name: set user to app
+  command: "echo app"
+  register: pgpass_user
+
+- name: create pgpass file for app user
+  template: src=home/*/pgpass.j2 dest=/home/app/.pgpass owner=app group=app mode=600

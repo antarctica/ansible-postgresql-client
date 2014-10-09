@@ -1,0 +1,9 @@
+---
+# Configure access to psql for controller user
+
+- name: set user to controller
+  command: "echo controller"
+  register: pgpass_user
+
+- name: create pgpass file for controller user
+  template: src=home/*/pgpass.j2 dest=/home/controller/.pgpass owner=controller group=controller mode=600

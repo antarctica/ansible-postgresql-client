@@ -1,0 +1,15 @@
+# {{ ansible_managed }}
+
+# hostname:port:database:username:password
+
+{% if postgresql_client_pgpass_user[pgpass_user.stdout_lines.0] is defined %}
+{% for line in postgresql_client_pgpass_user[pgpass_user.stdout_lines.0].lines %}
+{{ line.hostname }}:{{ line.port }}:{{ line.database }}:{{ line.username }}:{{ line.password }}
+{% endfor %}
+
+{% endif %}
+{% if postgresql_client_pgpass_defaults[pgpass_user.stdout_lines.0] is defined %}
+{% for line in postgresql_client_pgpass_defaults[pgpass_user.stdout_lines.0].lines %}
+{{ line.hostname }}:{{ line.port }}:{{ line.database }}:{{ line.username }}:{{ line.password }}
+{% endfor %}
+{% endif %}
