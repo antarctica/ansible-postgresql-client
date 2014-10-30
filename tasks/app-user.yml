@@ -1,9 +1,9 @@
 ---
 # Configure access to psql for app user
 
-- name: set user to app
-  command: "echo app"
+- name: set user to app user
+  command: "echo {{ postgresql_client_app_user_username }}"
   register: pgpass_user
 
 - name: create pgpass file for app user
-  template: src=home/*/pgpass.j2 dest=/home/app/.pgpass owner=app group=app mode=600
+  template: src=home/*/pgpass.j2 dest="/home/{{ postgresql_client_app_user_username }}/.pgpass" owner="{{ postgresql_client_app_user_username }}" group="{{ postgresql_client_app_user_username }}" mode=600
