@@ -1,7 +1,10 @@
 ---
 # Default variables - inventory or playbook overrides will be respected
 
+postgresql_client_controller_user_username: controller
 postgresql_client_controller_user_password: "stirring-up^the=flames$381194££iz€JQ4"
+
+postgresql_client_app_user_username: app
 postgresql_client_app_user_password: "chase-PaX-87524"
 
 postgresql_client_pgpass_defaults:
@@ -10,14 +13,14 @@ postgresql_client_pgpass_defaults:
       - hostname: "*"
         port: "*"
         database: "*"
-        username: controller
+        username: "{{ postgresql_client_controller_user_username }}"
         password: "{{ postgresql_client_controller_user_password }}"
   app:
     lines:
       - hostname: "*"
         port: "*"
         database: "*"
-        username: app
+        username: "{{ postgresql_client_app_user_username }}"
         password: "{{ postgresql_client_app_user_password }}"
 
 postgresql_client_pgpass_user: []

@@ -1,9 +1,9 @@
 ---
 # Configure access to psql for controller user
 
-- name: set user to controller
-  command: "echo controller"
+- name: set user to controller user
+  command: "echo {{ postgresql_client_controller_user_username }}"
   register: pgpass_user
 
 - name: create pgpass file for controller user
-  template: src=home/*/pgpass.j2 dest=/home/controller/.pgpass owner=controller group=controller mode=600
+  template: src=home/*/pgpass.j2 dest="/home/{{ postgresql_client_controller_user_username }}/.pgpass" owner="{{ postgresql_client_controller_user_username }}" group="{{ postgresql_client_controller_user_username }}" mode=600
