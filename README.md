@@ -46,7 +46,6 @@ This role is designed for internal use but if useful can be shared publicly.
     * Default password for app user.
     * MUST NOT contain ":" or "\" characters to ensure compatibility with `.pgpass` files.
     * Default: "chase-PaX-87524"
-
 * `postgresql_client_pgpass_defaults`
 	* Default connections to include in per user `pgpass` files.
 	* Default: (array)
