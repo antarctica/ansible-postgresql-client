@@ -30,11 +30,18 @@ This role is designed for internal use but if useful can be shared publicly.
 
 ## Variables
 
+* `postgresql_client_controller_user_username`
+    * The username of the controller user, used for management tasks, if enabled
+    * This variable **must** be a valid unix username
+    * Default: "controller"
 * `postgresql_client_controller_user_password`
     * Default password for controller user (i.e. root).
     * MUST NOT contain ":" or "\" characters to ensure compatibility with `.pgpass` files.
     * Default: "stirring-up^the=flames$381194££iz€JQ4"
-
+* `postgresql_client_app_user_username`
+    * The username of the app user, used for day to day tasks, if enabled
+    * This variable **must** be a valid unix username
+    * Default: "app"
 * `postgresql_client_app_user_password`
     * Default password for app user.
     * MUST NOT contain ":" or "\" characters to ensure compatibility with `.pgpass` files.
@@ -107,6 +114,7 @@ If using wildcard options ensure specific entries are suitably elevated.
 ### 0.1.1 - October 2014
 
 * Updating dependencies
+* App and controller user usernames are now configurable using a variable
 
 ### 0.1.0 - October 2014
 
