@@ -104,6 +104,10 @@ If using wildcard options ensure specific entries are suitably elevated.
 
 ## Changelog
 
+### 0.1.1 - October 2014
+
+* Updating dependencies
+
 ### 0.1.0 - October 2014
 
 * Initial version
