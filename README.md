@@ -59,7 +59,11 @@ These roles are used for internal projects which may dictate whether any contrib
     * The username of the controller user, used for management tasks, if enabled
     * This variable **must** be a valid unix username
     * Default: "controller"
-* `postgresql_client_controller_user_password`
+* `postgresql_client_controller_postgresql_user_username`
+    * The username of the controller PostgreSQL user, used for managing the database server, if enabled
+    * This variable **must** be a valid PostgreSQL user
+    * Default: "controller"
+* `postgresql_client_controller_postgresql_user_password`
     * Default password for controller user (i.e. root).
     * MUST NOT contain ":" or "\" characters to ensure compatibility with `.pgpass` files.
     * Default: "stirring-up^the=flames$381194££iz€JQ4"
@@ -67,7 +71,11 @@ These roles are used for internal projects which may dictate whether any contrib
     * The username of the app user, used for day to day tasks, if enabled
     * This variable **must** be a valid unix username
     * Default: "app"
-* `postgresql_client_app_user_password`
+* `postgresql_client_app_postgresql_user_username`
+    * The username of the app PostgreSQL user, used for day to day database tasks, if enabled
+    * This variable **must** be a valid PostgreSQL user
+    * Default: "app"
+* `postgresql_client_app_postgresql_user_password`
     * Default password for app user.
     * MUST NOT contain ":" or "\" characters to ensure compatibility with `.pgpass` files.
     * Default: "chase-PaX-87524"
@@ -79,15 +87,15 @@ These roles are used for internal projects which may dictate whether any contrib
 				*  hostname: "*"
 				*  port: "*"
 				*  database: "*"
-				*  username: "controller"
-				*  password: "{{ postgresql_client_controller_user_password }}"
+				*  username: "{{ postgresql_client_controller_postgresql_user_username }}"
+				*  password: "{{ postgresql_client_controller_postgresql_user_password }}"
 		*  "user"
 			*  lines: (array)
 				*  hostname: "*"
 				*  port: "*"
 				*  database: "*"
-				*  username: "app"
-				*  password: "{{ postgresql_client_app_user_password }}"
+				*  username: "{{ postgresql_client_app_postgresql_user_username }}"
+				*  password: "{{ postgresql_client_app_postgresql_user_password }}"
 
 * `postgresql_client_pgpass_user`
 	* Optional additional connections to include in per user `pgpass` files.
@@ -134,6 +142,10 @@ If using wildcard options ensure specific entries are suitably elevated.
 			* The password to use for this combination of `hostname`, `port`, `database`, `username` and `password`  
 
 ## Changelog
+
+### 0.2.0 - November 2014
+
+* Fixing separation of PostgreSQL and Unix user accounts for app and controller users.
 
 ### 0.1.1 - October 2014
 
