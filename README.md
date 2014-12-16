@@ -8,52 +8,19 @@ Installs PostgreSQL database client and configures password files for users
 * Installs PostgreSQL client package.
 * Configures `.pgpass` files for *app* and *controller* users to prevent password prompting, an entry for the optional app database (provided by `postgresql-server`) is included by default through `postgresql_client_pgpass_defaults`. Other connections can be provided at run time using `postgresql_client_pgpass_user`.
 
-## Author
-
-[British Antarctic Survey](http://www.antarctica.ac.uk) - Web & Applications Team
-
-Contact: [basweb@bas.ac.uk](mailto:basweb@bas.ac.uk).
-
 ## Availability
 
 This role is designed for internal use but if useful can be shared publicly.
 
-## Branches
+## Usage
 
-This project uses three permanent branches with the *Git Flow* branching model managing the interaction between branches.
+### Requirements
 
-* **Develop:** unstable, potentially non-working but most current version of roles. Bug fixes and features interact with this branch only.
-* **Master:** stable, tested, working version of role with full documentation. Releases and hot fixes mainly interact with this branch. This branch should when consuming roles internally.
-* **Public:** equivalent to the *master* branch, but available externally. Some configuration details may be altered or features removed to make available for public release.
-
-## Testing
-
-Manual testing is performed for all roles to ensure roles achieve their aims and this forms a prerequisite task for merging changes into the *master* and *public* branches.
-Wherever possible testing is as complete as possible meaning tasks such as downloading dependencies are performed as part of each test.
-
-## Issues
-
-Please log issues to the [BAS Web and Applications Team](https://jira.ceh.ac.uk/browse/BASWEB) project in Jira, within the *Project - Ansible Roles* component.
-
-If outside of NERC please get in touch to report any issues.
-
-## Contributions
-
-We have no formal contribution policy, if you spot any bugs or potential improvements please submit a pull request or get in touch.
-
-These roles are used for internal projects which may dictate whether any contributions can be included.
-
-## License
-
-[Open Government Licence V2](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/)
-
-## Requirements
-
-### BAS Ansible Role Collection (BARC)
+#### BAS Ansible Role Collection (BARC)
 
 * `core`
 
-## Variables
+### Variables
 
 * `postgresql_client_controller_user_username`
     * The username of the controller user, used for management tasks, if enabled
@@ -101,7 +68,7 @@ These roles are used for internal projects which may dictate whether any contrib
 	* Optional additional connections to include in per user `pgpass` files.
 	* Default: []  (empty array)
 
-### `.pgpass` files
+#### `.pgpass` files
 
 `postgresql_client_pgpass_defaults` and `postgresql_client_pgpass_user` are used to create a `.pgpass` file (defined [here](http://www.postgresql.org/docs/current/static/libpq-pgpass.html)), their format is as follows:
 
@@ -141,18 +108,26 @@ If using wildcard options ensure specific entries are suitably elevated.
 		* `password: <password>`
 			* The password to use for this combination of `hostname`, `port`, `database`, `username` and `password`  
 
-## Changelog
+## Contributing
 
-### 0.2.0 - November 2014
+This project welcomes contributions, see `CONTRIBUTING` for our general policy.
 
-* Fixing separation of PostgreSQL and Unix user accounts for app and controller users.
+## Developing
 
-### 0.1.1 - October 2014
+### Committing changes
 
-* Updating dependencies
-* App and controller user usernames are now configurable using a variable
-* Preparing for public release
+The [Git flow](https://github.com/fzaninotto/Faker#formatters) workflow is used to manage development of this package.
 
-### 0.1.0 - October 2014
+Discrete changes should be made within *feature* branches, created from and merged back into *develop* (where small one-line changes may be made directly).
 
-* Initial version
+When ready to release a set of features/changes create a *release* branch from *develop*, update documentation as required and merge into *master* with a tagged, [semantic version](http://semver.org/) (e.g. `v1.2.3`).
+
+After releases the *master* branch should be merged with *develop* to restart the process. High impact bugs can be addressed in *hotfix* branches, created from and merged into *master* directly (and then into *develop*).
+
+### Issue tracking
+
+Issues, bugs, improvements, questions, suggestions and other tasks related to this package are managed through the BAS Web & Applications Team Jira project ([BASWEB](https://jira.ceh.ac.uk/browse/BASWEB)).
+
+## License
+
+Copyright 2014 NERC BAS. Licensed under the MIT license, see `LICENSE` for details.
