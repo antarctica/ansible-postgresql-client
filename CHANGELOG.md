@@ -1,5 +1,9 @@
 # PostgreSQL Client (`postgresql-client`) - Changelog
 
+## UNRELEASED
+
+* Refactored default variables for better consistency with postgresql-server role.
+
 ## 0.2.1 - December 2014
 
 * Preparing role for public release
