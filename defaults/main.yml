@@ -1,14 +1,18 @@
 ---
 # Default variables - inventory or playbook overrides will be respected
 
+# OS Users
 postgresql_client_controller_user_username: controller
+postgresql_client_app_user_username: app
+
+# PostgreSQL Users
 postgresql_client_controller_postgresql_user_username: controller
 postgresql_client_controller_postgresql_user_password: "stirring-up^the=flames$381194££iz€JQ4"
 
-postgresql_client_app_user_username: app
 postgresql_client_app_postgresql_user_username: app
 postgresql_client_app_postgresql_user_password: "chase-PaX-87524"
 
+# PostgreSQL Databases
 postgresql_client_pgpass_defaults:
   controller:
     lines:

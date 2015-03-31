@@ -1,5 +1,9 @@
 # PostgreSQL Client (`postgresql-client`) - Changelog
 
+## 0.2.2 - March 2015
+
+* Fixing tasks to prevent unnecessary change reporting
+
 ## 0.2.1 - December 2014
 
 * Preparing role for public release
