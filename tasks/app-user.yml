@@ -4,6 +4,7 @@
 - name: set user to app user
   command: "echo {{ postgresql_client_app_user_username }}"
   register: pgpass_user
+  changed_when: False
 
 - name: create pgpass file for app user
   template: src=home/*/pgpass.j2 dest="/home/{{ postgresql_client_app_user_username }}/.pgpass" owner="{{ postgresql_client_app_user_username }}" group="{{ postgresql_client_app_user_username }}" mode=600
