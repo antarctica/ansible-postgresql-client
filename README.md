@@ -33,11 +33,11 @@ This role is designed for internal use but if useful can be shared publicly.
 * `postgresql_client_controller_postgresql_user_password`
     * Default password for controller user (i.e. root).
     * MUST NOT contain ":" or "\" characters to ensure compatibility with `.pgpass` files.
-    * Default: "stirring-up^the=flames$381194££iz€JQ4"
 * `postgresql_client_app_user_username`
     * The username of the app user, used for day to day tasks, if enabled
     * This variable **must** be a valid unix username
     * Default: "app"
+    * Default: "password"
 * `postgresql_client_app_postgresql_user_username`
     * The username of the app PostgreSQL user, used for day to day database tasks, if enabled
     * This variable **must** be a valid PostgreSQL user
@@ -45,7 +45,7 @@ This role is designed for internal use but if useful can be shared publicly.
 * `postgresql_client_app_postgresql_user_password`
     * Default password for app user.
     * MUST NOT contain ":" or "\" characters to ensure compatibility with `.pgpass` files.
-    * Default: "chase-PaX-87524"
+    * Default: "password"
 * `postgresql_client_pgpass_defaults`
 	* Default connections to include in per user `pgpass` files.
 	* Default: (array)
