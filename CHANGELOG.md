@@ -1,7 +1,10 @@
 # PostgreSQL Client (`postgresql-client`) - Changelog
 
+## 0.3.0 - August 2015
+
 * Updating default password variables for consistency to highlight they should be changed
 * Tidying up README
+
 ## 0.2.2 - March 2015
 
 * Fixing tasks to prevent unnecessary change reporting
