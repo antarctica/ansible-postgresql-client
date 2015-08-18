@@ -5,8 +5,8 @@
 Installs PostgreSQL database client and configures password files for users
 ## Overview
 
-* Installs PostgreSQL client package.
-* Configures `.pgpass` files for *app* and *controller* users to prevent password prompting, an entry for the optional app database (provided by `postgresql-server`) is included by default through `postgresql_client_pgpass_defaults`. Other connections can be provided at run time using `postgresql_client_pgpass_user`.
+* Installs PostgreSQL client package
+* Configures `.pgpass` files for *app* and *controller* users to prevent password prompting, an entry for the optional app database (provided by `postgresql-server`) is included by default through `postgresql_client_pgpass_defaults`. Other connections can be provided at run time using `postgresql_client_pgpass_user`
 
 ## Availability
 
@@ -24,65 +24,68 @@ This role is designed for internal use but if useful can be shared publicly.
 
 * `postgresql_client_controller_user_username`
     * The username of the controller user, used for management tasks, if enabled
-    * This variable **must** be a valid unix username
+    * This variable **MUST** be a valid UNIX username.
     * Default: "controller"
-* `postgresql_client_controller_postgresql_user_username`
-    * The username of the controller PostgreSQL user, used for managing the database server, if enabled
-    * This variable **must** be a valid PostgreSQL user
-    * Default: "controller"
-* `postgresql_client_controller_postgresql_user_password`
-    * Default password for controller user (i.e. root).
-    * MUST NOT contain ":" or "\" characters to ensure compatibility with `.pgpass` files.
-    * Default: "stirring-up^the=flames$381194££iz€JQ4"
 * `postgresql_client_app_user_username`
     * The username of the app user, used for day to day tasks, if enabled
-    * This variable **must** be a valid unix username
+    * This variable **MUST** be a valid UNIX username.
     * Default: "app"
+* `postgresql_client_controller_postgresql_user_username`
+    * The username of the controller PostgreSQL user, used for managing the database server, if enabled
+    * This variable **MUST** be a valid PostgreSQL user.
+    * Default: "controller"
+* `postgresql_client_controller_postgresql_user_password`
+    * Default password for controller user (i.e. root)
+    * This **MUST NOT** contain `:` or `\` characters to ensure compatibility with `.pgpass` files.
+    * Default: "password"
 * `postgresql_client_app_postgresql_user_username`
     * The username of the app PostgreSQL user, used for day to day database tasks, if enabled
-    * This variable **must** be a valid PostgreSQL user
+    * This variable **MUST** be a valid PostgreSQL user.
     * Default: "app"
 * `postgresql_client_app_postgresql_user_password`
     * Default password for app user.
-    * MUST NOT contain ":" or "\" characters to ensure compatibility with `.pgpass` files.
-    * Default: "chase-PaX-87524"
+    * This **MUST NOT** contain `:` or `\` characters to ensure compatibility with `.pgpass` files.
+    * Default: "password"
 * `postgresql_client_pgpass_defaults`
-	* Default connections to include in per user `pgpass` files.
+	* Default connections to include in per user `.pgpass` files
+    * Structured as a (multi-level) array of lines per (postgreSQL) user, see *`.pgpass` files* section for details.
 	* Default: (array)
-		*  "controller"
-			*  lines: (array)
-				*  hostname: "*"
-				*  port: "*"
-				*  database: "*"
-				*  username: "{{ postgresql_client_controller_postgresql_user_username }}"
-				*  password: "{{ postgresql_client_controller_postgresql_user_password }}"
-		*  "user"
-			*  lines: (array)
-				*  hostname: "*"
-				*  port: "*"
-				*  database: "*"
-				*  username: "{{ postgresql_client_app_postgresql_user_username }}"
-				*  password: "{{ postgresql_client_app_postgresql_user_password }}"
-
+		* "controller"
+			* lines: (array)
+				* hostname: "*"
+				* port: "*"
+				* database: "*"
+				* username: "{{ postgresql_client_controller_postgresql_user_username }}"
+				* password: "{{ postgresql_client_controller_postgresql_user_password }}"
+		* "user"
+			* lines: (array)
+				* hostname: "*"
+				* port: "*"
+				* database: "*"
+				* username: "{{ postgresql_client_app_postgresql_user_username }}"
+				* password: "{{ postgresql_client_app_postgresql_user_password }}"
 * `postgresql_client_pgpass_user`
-	* Optional additional connections to include in per user `pgpass` files.
+	* Optional additional connections to include in per user `pgpass` files
+    * Structured as a (multi-level) array of lines per (postgreSQL) user, see *`.pgpass` files* section for details.
 	* Default: []  (empty array)
 
 #### `.pgpass` files
 
 `postgresql_client_pgpass_defaults` and `postgresql_client_pgpass_user` are used to create a `.pgpass` file (defined [here](http://www.postgresql.org/docs/current/static/libpq-pgpass.html)), their format is as follows:
 
-    <os_user>
-      lines:
-        - hostname: <hostname>
-          port: <port>
-          database: <database>
-          username: <username>
-          password: <password>
+```
+<os_user>
+  lines:
+    - hostname: <hostname>
+      port: <port>
+      database: <database>
+      username: <username>
+      password: <password>
+```
 
-Entries defined in this file are tried in order, therefore `postgresql_client_pgpass_user` entries are outputted before `postgresql_client_pgpass_defaults`.  
+Entries defined in this file are tried in order, therefore `postgresql_client_pgpass_user` entries are outputted before `postgresql_client_pgpass_defaults`. If using wildcard options ensure specific entries are suitably elevated.
 
-If using wildcard options ensure specific entries are suitably elevated.
+A complex Ansible variable is used to represent the structure of a `.pgpass` file, as described below:
 
 * `<os_user>`
 	* Determine which user account the `.pgpass` file should be outputted to
