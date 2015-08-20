@@ -3,9 +3,10 @@
 **Part of the BAS Ansible Role Collection (BARC)**
 
 Installs PostgreSQL database client and configures password files for users
+
 ## Overview
 
-* Installs PostgreSQL client package
+* Installs PostgreSQL client package, plus system packages and python bindings to support tools such as SQLAlchemy
 * Configures `.pgpass` files for *app* and *controller* users to prevent password prompting, an entry for the optional app database (provided by `postgresql-server`) is included by default through `postgresql_client_pgpass_defaults`. Other connections can be provided at run time using `postgresql_client_pgpass_user`
 
 ## Availability

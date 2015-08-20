@@ -1,5 +1,6 @@
 # PostgreSQL Client (`postgresql-client`) - Changelog
 
+* Adding system library (libpq-dev) and python bindings required for tools such as SQLAlchemy.
 ## 0.3.0 - August 2015
 
 * Updating default password variables for consistency to highlight they should be changed
